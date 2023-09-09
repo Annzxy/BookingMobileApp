@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Booking</string>
+    <string-array name="roles">
+        <item>Admin</item>
+        <item>Customer</item>
+        <item>Supplier</item>
+    </string-array>
+    
+</resources>
