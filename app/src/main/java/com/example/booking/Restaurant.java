@@ -8,20 +8,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private SearchView restaurantSearchView;
+    private GenericAdapter adapter;
+    private List<ListItem> restaurantDeals = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant);   // Make sure you have a corresponding XML layout for restaurants
+        setContentView(R.layout.activity_restaurant);
 
         // For the return button
-        Button returnButton = findViewById(R.id.restaurantReturnButton);   // Adjust this ID if you have a different one in your XML for restaurant
+        Button returnButton = findViewById(R.id.restaurantReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,19 +36,31 @@ public class Restaurant extends AppCompatActivity {
         });
 
         // Initialize RecyclerView
-        recyclerView = findViewById(R.id.restaurantDealsRecyclerView);   // Adjust this ID if it's different in your XML layout
+        recyclerView = findViewById(R.id.restaurantDealsRecyclerView);
 
-        // Create a list of restaurants
-        List<ListItem> restaurantDeals = new ArrayList<>();
+        // Initialize SearchView
+        restaurantSearchView = findViewById(R.id.restaurantSearchView);
+        restaurantSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-        // Dummy data for demonstration purposes; You'll likely retrieve this from a database or an API
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        // Dummy data for demonstration purposes
         restaurantDeals.add(new ListItem("Restaurant One", R.drawable.restaurant_one_image, "$80", "50% OFF"));
         restaurantDeals.add(new ListItem("Restaurant Two", R.drawable.restaurant_two_image, "$65", "45% OFF"));
         restaurantDeals.add(new ListItem("Restaurant Three", R.drawable.restaurant_three_image, "$90", "30% OFF"));
-        // ... add as many restaurants as you want
 
-        // Set the RecyclerView's layout manager and adapter
+        // Initialize and set the RecyclerView's layout manager and adapter
+        adapter = new GenericAdapter(restaurantDeals, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new GenericAdapter(restaurantDeals, this));
+        recyclerView.setAdapter(adapter);
     }
 }

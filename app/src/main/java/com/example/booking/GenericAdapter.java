@@ -5,19 +5,24 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class GenericAdapter extends RecyclerView.Adapter<GenericViewHolder> {
+public class GenericAdapter extends RecyclerView.Adapter<GenericViewHolder> implements Filterable {
 
     private List<ListItem> items;
+    private List<ListItem> filteredList;
     private Context context;
 
     public GenericAdapter(List<ListItem> items, Context context) {
         this.items = items;
+        this.filteredList = new ArrayList<>(items); // Initialize with all items
         this.context = context;
     }
 
@@ -30,7 +35,7 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull GenericViewHolder holder, int position) {
-        ListItem currentItem = items.get(position);
+        ListItem currentItem = filteredList.get(position); // Use the filtered list here
 
         holder.dealListingTitle.setText(currentItem.getTitle());
         holder.dealListingImage.setImageResource(currentItem.getImageResId());
@@ -54,7 +59,37 @@ public class GenericAdapter extends RecyclerView.Adapter<GenericViewHolder> {
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return filteredList.size();  // Use the filtered list count
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    filteredList = new ArrayList<>(items);
+                } else {
+                    List<ListItem> filteredListInternal = new ArrayList<>();
+                    for (ListItem row : items) {
+                        if (row.getTitle().toLowerCase().contains(charString.toLowerCase())) {
+                            filteredListInternal.add(row);
+                        }
+                    }
+                    filteredList = filteredListInternal;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredList = (ArrayList<ListItem>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
-

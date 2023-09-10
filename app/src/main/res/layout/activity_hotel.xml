@@ -14,6 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,6 +30,13 @@
             android:text="Return"
             android:backgroundTint="?attr/colorAccent" />
     </androidx.appcompat.widget.Toolbar>
+
+    <SearchView
+        android:id="@+id/hotelSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:queryHint="Search for hotels..." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hotelDealsRecyclerView"

@@ -30,6 +30,13 @@
             android:backgroundTint="?attr/colorAccent" />
     </androidx.appcompat.widget.Toolbar>
 
+    <SearchView
+        android:id="@+id/activitySearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:queryHint="Search for hotels..." />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activityDealsRecyclerView"
         android:layout_width="match_parent"
