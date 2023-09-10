@@ -37,6 +37,17 @@ public class ItemDetail extends AppCompatActivity {
 
         buttonReturn = findViewById(R.id.buttonReturn);
 
+        buttonProfile = findViewById(R.id.buttonProfile);
+
+        //Profile button
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ItemDetail.this, Profile.class);
+                startActivity(intent);
+            }
+        });
+
         //Return button
         buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +98,9 @@ public class ItemDetail extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("item_details", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        editor.putString("title", itemTitle.getText().toString());
+        editor.putString("price", itemPrice.getText().toString());
+        editor.putString("discount", itemDiscount.getText().toString());
         editor.putString("quantity", quantityEditText.getText().toString());
         editor.putString("booking_time", timeEditText.getText().toString());
 

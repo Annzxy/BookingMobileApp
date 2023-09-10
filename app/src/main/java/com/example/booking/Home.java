@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +19,8 @@ public class Home extends AppCompatActivity implements SelectCategory {
 
     private TextView welcomeTextView;
     private RecyclerView recyclerView;
+
+    private Button buttonProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,16 @@ public class Home extends AppCompatActivity implements SelectCategory {
         String email = currentUserData[0];
         welcomeTextView.setText(String.format("Welcome, %s!", email));
 
+        buttonProfile = findViewById(R.id.profileButton);
+
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profileIntent = new Intent(Home.this, Profile.class);
+                startActivity(profileIntent);
+            }
+        });
+
         //Recyclerview
         recyclerView = findViewById(R.id.categoryRV);
 
@@ -39,6 +54,8 @@ public class Home extends AppCompatActivity implements SelectCategory {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new CategoryVA(categories, this, this));
+
+
     }
 
     @Override

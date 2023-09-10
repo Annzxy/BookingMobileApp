@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,14 +38,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#1D2020"
+            android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#1D2020"
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 </ScrollView>

@@ -7,6 +7,7 @@
     tools:context=".Home"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="#F3BA0F"
 
     >
 
@@ -15,7 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome, User!"
-        android:textSize="24sp"
+        android:textSize="20sp"
+        android:textColor="#333"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +27,14 @@
         android:id="@+id/categoryRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/profileButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:backgroundTint="#1D2020"
+        android:textColor="#ffffff" />
 
 
 </LinearLayout>
