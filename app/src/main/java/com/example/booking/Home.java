@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements SelectCategory {
 
     private TextView welcomeTextView;
     private RecyclerView recyclerView;
@@ -38,6 +38,11 @@ public class Home extends AppCompatActivity {
         categories.add(new Category("Activity", R.drawable.activity_icon));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new CategoryVA(getApplicationContext(), categories));
+        recyclerView.setAdapter(new CategoryVA(categories, this, this));
+    }
+
+    @Override
+    public void onCategoryClick(Category category) {
+        Toast.makeText(this, category.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }
