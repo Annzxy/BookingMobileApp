@@ -2,6 +2,7 @@ package com.example.booking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,19 @@ public class ItemDetail extends AppCompatActivity {
         submitButton = findViewById(R.id.buttonSubmit);
         buttonProfile = findViewById(R.id.buttonProfile);
         buttonReturn = findViewById(R.id.buttonReturn);
+
+        buttonReturn = findViewById(R.id.buttonReturn);
+
+        //Return button
+        buttonReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Return to Hotel page
+                Intent intent = new Intent(ItemDetail.this, Hotel.class);
+                startActivity(intent);
+                finish();  // This will close the ItemDetail page and take you back to Hotel page.
+            }
+        });
 
         // Retrieve the extras
         String title = getIntent().getStringExtra("title");
